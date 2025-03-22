@@ -25,3 +25,6 @@ services:
         "spring.jpa.hibernate.ddl-auto": "update"
       }'
 
+volumes:
+  db:
+    
