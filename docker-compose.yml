@@ -1,0 +1,76 @@
+services:
+  database:
+    image: mysql:5.7
+    container_name: kaddem-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: kaddem
+      TZ: UTC
+    ports:
+      - "3308:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "database"]
+      interval: 5s
+      timeout: 10s
+      retries: 20  
+    networks:
+      - kaddem-net
+
+  pro-kaddem:
+    image: nousseiba/kaddem:1.0.0
+    container_name: kaddem-app
+    restart: unless-stopped
+    depends_on:
+      database:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://database:3306/kaddem?useSSL=false&createDatabaseIfNotExist=true&autoReconnect=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      SPRING_PROFILES_ACTIVE: docker
+    ports:
+      - "8093:8089"
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -f http://localhost:8089/kaddem/actuator/health || exit 1" ]
+      interval: 10s
+      timeout: 10s
+      retries: 20
+      start_period: 60s
+    volumes:
+      - ./logs:/app/logs
+    networks:
+      - kaddem-net
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus-kaddem
+    restart: unless-stopped
+    ports:
+      - "9099:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - kaddem-net
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana-kaddem
+    restart: unless-stopped
+    ports:
+      - "3009:3000"
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: "admin"
+    depends_on:
+      - prometheus
+    networks:
+      - kaddem-net
+
+volumes:
+  mysql_data:
+
+networks:
+  kaddem-net:
+    driver: bridge
