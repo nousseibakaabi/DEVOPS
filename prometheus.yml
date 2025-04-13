@@ -1,15 +1,32 @@
 global:
-  scrape_interval: 15s
-  evaluation_interval: 15s
+  scrape_interval: 5s
+  evaluation_interval: 5s
 
 scrape_configs:
-  - job_name: 'spring-boot'
-    metrics_path: '/actuator/prometheus'
-    static_configs:
-      - targets: ['pro-kaddem:8089']
-        labels:
-          application: 'pro-kaddem'
-
   - job_name: 'prometheus'
     static_configs:
-      - targets: ['prometheus:9090']
+      - targets: ['localhost:9090']
+
+  - job_name: 'spring-boot'
+    metrics_path: '/kaddem/actuator/prometheus'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['pro-kaddem:8089']
+    scheme: 'http'
+    tls_config:
+      insecure_skip_verify: true
+    relabel_configs:
+      - source_labels: [__metrics_path__]
+        target_label: metrics_path
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: application
+        replacement: kaddem
+
+  - job_name: 'jenkins'
+    metrics_path: '/prometheus'
+    static_configs:
+      - targets: ['192.168.50.4:8080']
+    basic_auth:
+      username: 'noussa'
+      password: '1132a14e099816b2788a12d252248031eb'
