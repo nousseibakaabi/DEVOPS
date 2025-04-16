@@ -1,0 +1,35 @@
+<div class="container mt-4">
+    <h2>Edit Student</h2>
+    <form [formGroup]="etudiantForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label class="form-label">First Name</label>
+        <input type="text" class="form-control" formControlName="prenomE">
+        <div *ngIf="etudiantForm.get('prenomE')?.invalid && etudiantForm.get('prenomE')?.touched" class="text-danger">
+          First name is required.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Last Name</label>
+        <input type="text" class="form-control" formControlName="nomE">
+        <div *ngIf="etudiantForm.get('nomE')?.invalid && etudiantForm.get('nomE')?.touched" class="text-danger">
+          Last name is required.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Option</label>
+        <select class="form-select" formControlName="op">
+            <option value="" disabled>Select an option</option>
+            <option value="GAMIX" >GAMIX</option>
+            <option value="SE" >SE</option>
+            <option value="SIM" >SIM</option>
+            <option value="NIDS" >NIDS</option>
+
+          </select>
+        <div *ngIf="etudiantForm.get('op')?.invalid && etudiantForm.get('op')?.touched" class="text-danger">
+          Option is required.
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="etudiantForm.invalid">Update</button>
+      <button type="button" class="btn btn-secondary ms-2" (click)="navigateToEtudiants()">Cancel</button>
+    </form>
+  </div>

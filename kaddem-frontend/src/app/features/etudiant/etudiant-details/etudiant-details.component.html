@@ -1,0 +1,12 @@
+<div class="container mt-4">
+    <h2>Student Details</h2>
+    <div *ngIf="etudiant" class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{ etudiant.prenomE }} {{ etudiant.nomE }}</h5>
+        <p class="card-text"><strong>ID:</strong> {{ etudiant.idEtudiant }}</p>
+        <p class="card-text"><strong>Option:</strong> {{ etudiant.op }}</p>
+        <button class="btn btn-primary me-2" (click)="router.navigate(['/edit', etudiant.idEtudiant])">Edit</button>
+        <button class="btn btn-secondary" (click)="goBack()">Back to List</button>
+      </div>
+    </div>
+  </div>

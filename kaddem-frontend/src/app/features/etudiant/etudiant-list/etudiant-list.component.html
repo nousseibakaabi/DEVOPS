@@ -1,0 +1,34 @@
+<div class="container mt-4">
+    <h2>Student List</h2>
+    
+    <!-- <div class="mb-3">
+      <input type="text" class="form-control" placeholder="Search students..." 
+             [(ngModel)]="searchTerm" (input)="search()">
+    </div> -->
+    
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Option</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let etudiant of filteredEtudiants">
+          <td>{{ etudiant.idEtudiant }}</td>
+          <td>{{ etudiant.prenomE}}</td>
+          <td>{{ etudiant.nomE }}</td>
+          <td>{{ etudiant.op }}</td>
+          <td>
+              <button class="btn btn-info btn-sm me-2" (click)="router.navigate(['/details', etudiant.idEtudiant])">Details</button>
+              <button class="btn btn-warning btn-sm me-2" (click)="router.navigate(['/edit', etudiant.idEtudiant])">Edit</button>
+            <button class="btn btn-danger btn-sm" (click)="deleteEtudiant(etudiant.idEtudiant)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <button class="btn btn-primary" (click)="router.navigate(['/add'])">Add New Student</button>  </div>

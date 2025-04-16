@@ -1,0 +1,224 @@
+/* General Styling */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  h2 {
+    color: #343a40;
+    margin-bottom: 25px;
+    font-weight: 600;
+    border-bottom: 2px solid #6c757d;
+    padding-bottom: 10px;
+  }
+  
+  /* Form Styling */
+  .form-label {
+    font-weight: 500;
+    color: #495057;
+    margin-bottom: 8px;
+  }
+  
+  .form-control, .form-select {
+    border-radius: 8px;
+    padding: 10px 15px;
+    border: 1px solid #ced4da;
+    transition: all 0.3s ease;
+    box-shadow: none;
+  }
+  
+  .form-control:focus, .form-select:focus {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.1);
+  }
+  
+  .text-danger {
+    font-size: 0.85rem;
+    margin-top: 5px;
+  }
+  
+  /* Button Styling */
+  .btn {
+    border-radius: 8px;
+    padding: 8px 20px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .btn-primary {
+    background-color: #4e73df;
+    border-color: #4e73df;
+  }
+  
+  .btn-primary:hover {
+    background-color: #3a5ec0;
+    border-color: #3a5ec0;
+    transform: translateY(-2px);
+  }
+  
+  .btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+    transform: translateY(-2px);
+  }
+  
+  .btn-info {
+    background-color: #36b9cc;
+    border-color: #36b9cc;
+  }
+  
+  .btn-warning {
+    background-color: #f6c23e;
+    border-color: #f6c23e;
+  }
+  
+  .btn-danger {
+    background-color: #e74a3b;
+    border-color: #e74a3b;
+  }
+  
+  .btn-sm {
+    padding: 5px 10px;
+    font-size: 0.875rem;
+  }
+  
+  /* Card Styling */
+  .card {
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .card-body {
+    padding: 20px;
+  }
+  
+  .card-title {
+    font-size: 1.5rem;
+    color: #4e73df;
+    margin-bottom: 15px;
+  }
+  
+  .card-text {
+    margin-bottom: 10px;
+    color: #5a5c69;
+  }
+  
+  /* Table Styling */
+  .table {
+    margin-top: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  }
+  
+  .table thead th {
+    background-color: #4e73df;
+    color: white;
+    font-weight: 600;
+    padding: 12px 15px;
+  }
+  
+  .table tbody tr {
+    transition: background-color 0.2s ease;
+  }
+  
+  .table tbody tr:hover {
+    background-color: rgba(78, 115, 223, 0.05);
+  }
+  
+  .table td, .table th {
+    padding: 12px 15px;
+    vertical-align: middle;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .container {
+      padding: 15px;
+    }
+    
+    .btn {
+      padding: 8px 15px;
+      font-size: 0.9rem;
+    }
+    
+    .table-responsive {
+      overflow-x: auto;
+    }
+  }
+  
+  /* Animation for form elements */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .form-group {
+    animation: fadeIn 0.4s ease forwards;
+  }
+  
+  /* Success message styling (you can add this when needed) */
+  .alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border-radius: 8px;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border: 1px solid #c3e6cb;
+  }
+
+
+
+  .btn {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .btn:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+  }
+  
+  .btn:focus:not(:active)::after {
+    animation: ripple 0.6s ease-out;
+  }
+  
+  @keyframes ripple {
+    0% {
+      transform: scale(0, 0);
+      opacity: 0.5;
+    }
+    100% {
+      transform: scale(20, 20);
+      opacity: 0;
+    }
+  }
